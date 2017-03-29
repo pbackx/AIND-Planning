@@ -506,6 +506,15 @@ class PlanningGraph():
         :return: int
         '''
         level_sum = 0
-        # TODO implement
         # for each goal in the problem, determine the level cost, then add them together
+        for goal in self.problem.goal:
+            level_sum += self.h_level(goal)
         return level_sum
+
+    def h_level(self, goal) -> int:
+        for i in range(0, len(self.s_levels)):
+            for node_s in self.s_levels[i]:
+                if node_s.literal == goal:
+                    return i
+        raise Exception("Goal not found in graph!")
+
